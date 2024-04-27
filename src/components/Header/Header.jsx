@@ -2,6 +2,8 @@ import React from 'react'
 import { Container, Logo, LogoutBtn } from '../index'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import userX from '../../assets/person_off_FILL0_wght400_GRAD0_opsz24.svg'
+import accountCircle from '../../assets/account_circle_FILL0_wght400_GRAD0_opsz24.svg'
 
 // a very user specific component (optional) as different things are displayed if user is logged in
 
@@ -71,12 +73,12 @@ function Header() {
         {authStatus && (
           <div className='mr-16 flex items-center'>
             <span className='mr-2  font-semibold text-tiger-yellow hidden sm:inline-block'>{userData.name}</span>
-            <img src="src\assets\account_circle_FILL0_wght400_GRAD0_opsz24.svg" alt="person-off" width="30px" className='hidden sm:inline-block'/>
+            <img src={accountCircle} alt="person-off" width="30px" className='hidden sm:inline-block'/>
             <LogoutBtn className={'inline-bock px-6 py-2 duration-200 hover:bg-tiger-yellow hover:text-cornsilk rounded-full'} />
           </div>
         )}
         {!authStatus && (
-          <img src="src\assets\person_off_FILL0_wght400_GRAD0_opsz24.svg" alt="person-off" width="30px" className='mr-16' />
+          <img src={userX} alt="person-off" width="30px" className='mr-16' />
         )}
       </nav>
     </header>

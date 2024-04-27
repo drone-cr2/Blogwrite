@@ -1,12 +1,13 @@
 import React from 'react'
 import { Button } from '../components'
 import { Link } from 'react-router-dom'
+import bigLogo from '../assets/blogwrite-landing.png'
 
 function LandingPage() {
     return (
         <>
             <div className=' grid grid-cols-2 sm:grid-cols-3'>
-                <img src="src\assets\blogwrite-landing.png" alt="blogwrite-logo" className='col-span-2 sm:col-span-1' />
+                <img src={bigLogo} alt="blogwrite-logo" className='col-span-2 sm:col-span-1' />
                 <div className='col-span-2 sm:mt-32'>
                     <p className=' my-3 text-2xl font-semibold text-center sm:text-3xl' >Write Puns & Paragraphs ...<br className='sm:hidden' /> <span className='text-tiger-yellow'>Where Words Get Cozy</span></p>
                     <p className=' text-lg font-semibold text-center my-3'>Because life needs more 
