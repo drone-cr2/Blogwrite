@@ -5,7 +5,7 @@ import React from 'react'
 
 function Container({childen}) {
   return (
-    <div className='w-full max-w-7xl mx-auto px-4 border border-green-400'>{childen}</div>
+    <div className='w-full max-w-7xl mx-auto px-4'>{childen}</div>
   )
 }
 

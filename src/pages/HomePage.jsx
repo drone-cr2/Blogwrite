@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import services from '../appwrite/config'
 import { Postcard, Container } from '../components'
 import { useSelector } from 'react-redux'
+import LandingPage from './LandingPage'
 
 function HomePage() {
 
@@ -19,7 +20,7 @@ function HomePage() {
     if (!status) {
         return (<div>
             <Container childen={
-                <h1>Login to see posts</h1>
+                <LandingPage />
             } />
         </div>)
     }
@@ -27,10 +28,10 @@ function HomePage() {
         return (
             <div className='w-full py-8'>
                 <Container childen={
-                    <div className='flex flex-wrap'>
-                        {posts.map(post => 
-                        	<Postcard key={post.$id} {...post}/>
-												)}
+                    <div className='flex flex-wrap text-center'>
+                        {posts.map(post =>
+                            <Postcard key={post.$id} {...post} />
+                        )}
                     </div>
                 } />
                 {/* close container */}

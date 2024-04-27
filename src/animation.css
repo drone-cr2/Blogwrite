@@ -1,0 +1,23 @@
+.animationShape{
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-top: 500px;
+    background-color: #bc6c25ff;
+    color: cornsilk;
+    border-radius: 50%;
+    animation: boing 6s ease-in-out alternate infinite;
+}
+
+@keyframes boing{
+    0%,100%{
+        transform: translateY(0px);
+        /* transform: scale(2); */
+    }
+
+    50%{
+        transform: translateY(-400px) scale(1.5);
+        background-color: #dda15eff;
+        color: #bc6c25ff;
+    }    
+}

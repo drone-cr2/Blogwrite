@@ -1,10 +1,10 @@
-import './App.css'
 import { useDispatch } from 'react-redux'
 import authService from './appwrite/Auth'
 import { useEffect, useState } from 'react';
 import { login, logout } from "./store/authSlice"
-import { Header,Footer } from './components/index';
+import { Header, Footer } from './components/index';
 import { Outlet } from 'react-router-dom';
+import './animation.css'
 
 function App() {
 
@@ -35,13 +35,17 @@ function App() {
 
   return !loading ? (
     <>
-      <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+      <div className='min-h-screen flex flex-wrap content-between'>
         <div className='w-full block'>
           <Header />
           <main>
             <Outlet />
           </main>
           <Footer />
+          <div className='sm:hidden'>
+            <div className="animationShape text-center ">Breathe</div>
+            <div className='text-center'>woah there, you scrolled too much.</div>
+          </div>
         </div>
       </div>
     </>

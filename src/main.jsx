@@ -13,6 +13,7 @@ import AddPostPage from './pages/AddPostPage'
 import AllPostsPage from './pages/AllPostsPage'
 import EditPostPage from './pages/EditPostPage'
 import Post from './pages/Post'
+import TermsAndConditions from './pages/TermsAndConditions.jsx'
 
 
 const router = createBrowserRouter([
@@ -68,6 +69,12 @@ const router = createBrowserRouter([
         path: "/post/:slug",
         element: (
           <Post />
+        )
+      },
+      {
+        path: "/terms",
+        element: (
+          <TermsAndConditions />
         )
       },
 

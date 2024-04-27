@@ -108,8 +108,8 @@ function PostForm({post}) {
 
     return (
         // useForm syntax, passing "submit"(own method) to "handleSubmit"(useForm method)
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-            <div className="w-2/3 px-2">
+        <form onSubmit={handleSubmit(submit)} className="mt-3 grid grid-cols-2 sm:grid-cols-3">
+            <div className="col-span-2 px-2">
                 {/* Input is our own component, notice ...register of everyone of them*/}
                 <Input
                     label="Title :"
@@ -131,7 +131,7 @@ function PostForm({post}) {
                 <RealTimeEditor label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
 
-            <div className="w-1/3 px-2">
+            <div className="mt-3 col-span-1 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"

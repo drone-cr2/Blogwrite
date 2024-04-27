@@ -18,20 +18,29 @@ function AllPostsPage() {
     })
   }, [])
 
+  if (posts.length === 0) {
+    return(
+      <div className='w-full my-80'>
+        <p className='text-xl font-semibold text-center'>NO POSTS :( <br /> CREATE/ADD A POST</p>
+      </div>
+    )
+  }
+  else {
+    return (
+      <div className='w-full py-8'>
+        <Container childen={
+          <div className='flex flex-wrap'>
+            {posts.map(post => 
+              <Postcard key={post.$id} {...post} ownPost={true} />
+              // destrusturing the "post" and passing the "ownPost" prop as true to enable delete option  
+            )}
+          </div>
+        } />
+        {/* close container */}
+      </div>
+    )
+  }
 
-  return (
-    <div className='w-full py-8'>
-      <Container childen={
-        <div className='flex flex-wrap'>
-          {posts.map(post => 
-            <Postcard key={post.$id} {...post} ownPost={true} />
-            // destrusturing the "post" and passing the "ownPost" prop as true to enable delete option  
-          )}
-        </div>
-      } />
-      {/* close container */}
-    </div>
-  )
 }
 
 export default AllPostsPage

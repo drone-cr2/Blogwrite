@@ -27,10 +27,10 @@ export class Services{
                 slug,
                 {
                     title,
-                    content,
                     featuredImage,
                     status,
-                    user_id
+                    user_id,
+                    content
                 }
             )
             return promise;

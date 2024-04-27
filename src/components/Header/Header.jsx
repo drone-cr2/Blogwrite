@@ -10,6 +10,7 @@ function Header() {
 
   //firstly find out if user is logged in or not through state
   const authStatus = useSelector((state) => state.auth.status)
+  const userData = useSelector(state => state.auth.userData)
 
   //usually navbar is an array of objects(containing some related values) which is looped over, coz its east to add/remove items
   //(a way of coding PRoDucTioN gRadE)
@@ -31,7 +32,7 @@ function Header() {
       active: !authStatus,
     },
     {
-      name: "All Posts",
+      name: "My Posts",
       slug: "/all-posts",
       active: authStatus,
     },
@@ -43,38 +44,41 @@ function Header() {
   ]
 
   return (
-    <header className='py-3 shadow bg-gray-500'>
-      <Container childen={
-        <nav className='flex'>
-          <div className='mr-4'>
-            <Link to='/' >
-              <Logo width='70px' />
-            </Link>
+    <header className='py-2 shadows bg-cornsilk border border-b-2 border-tiger-yellow'>
+      <nav className='flex'>
+        <div className='ml-16 hidden sm:inline-block'>
+          <Link to='/' >
+            <Logo width='70px' />
+          </Link>
+        </div>
+        <ul className='flex items-center mx-auto '>
+
+          {navItems.map((item) =>
+            item.active ? (
+              <li key={item.name}>
+                <button
+                  className='inline-bock px-6 py-2 duration-200 hover:bg-earth-yellow rounded-full'
+                  onClick={() => navigate(item.slug)}>
+                  {item.name}</button>
+              </li>
+            ) : (null)
+          )}
+        </ul>
+
+        {/* syntax {variable && (jsx)}
+          jsx is always true-thy value, hence if the variable is true then the jsx will be rendered
+          conditional rendering syntax */}
+        {authStatus && (
+          <div className='mr-16 flex items-center'>
+            <span className='mr-2  font-semibold text-tiger-yellow hidden sm:inline-block'>{userData.name}</span>
+            <img src="src\assets\account_circle_FILL0_wght400_GRAD0_opsz24.svg" alt="person-off" width="30px" className='hidden sm:inline-block'/>
+            <LogoutBtn className={'inline-bock px-6 py-2 duration-200 hover:bg-tiger-yellow hover:text-cornsilk rounded-full'} />
           </div>
-          <ul className='flex ml-auto'>
-
-            {navItems.map((item) =>
-              item.active ? (
-                <li key={item.name}>
-                  <button
-                    className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
-                    onClick={() => navigate(item.slug)}>
-                    {item.name}</button>
-                </li>
-              ) : (null)
-            )}
-
-            {authStatus && (<li>
-              <LogoutBtn className={'inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'} />
-            </li>)}
-            {/* syntax {variable && (jsx)}
-            jsx is always true-thy value, hence if the variable is true then the jsx will be rendered
-            conditional rendering syntax */}
-
-          </ul>
-        </nav>
-      } />
-      {/* close container */}
+        )}
+        {!authStatus && (
+          <img src="src\assets\person_off_FILL0_wght400_GRAD0_opsz24.svg" alt="person-off" width="30px" className='mr-16' />
+        )}
+      </nav>
     </header>
   )
 }
