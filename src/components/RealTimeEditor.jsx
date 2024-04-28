@@ -1,6 +1,7 @@
 import React from 'react'
 import {Editor} from'@tinymce/tinymce-react'
 import {Controller} from 'react-hook-form'
+import conf from '../conf/conf'
 
 // this component is all about creating the real time rich text editor used to create or update articles
 // its made simple via the tinymce which provides a simple text editor just via using <Editor /> 
@@ -29,7 +30,7 @@ function RealTimeEditor({name,control,label,defaultValue=""}) {
         control={control}  
         render={({field: {onChange}})=>(
             <Editor
-            apiKey='qrcdtgs6fp0zd822gidye4y584w7twzn6ffty6fwb53fma1h'
+            apiKey={conf.tinymceAPIkey}
             initialValue={defaultValue}
             init={{
                 initialValue: defaultValue,
