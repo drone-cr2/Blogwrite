@@ -27,12 +27,14 @@ function PostForm({post}) {
         }
     })
 
+    const [error, setError] = useState("")
     const navigate = useNavigate()
     const userData = useSelector((state) => state.auth.userData)
 
     //2 cases....already post exists, if so, update it, else create new
     //the "data" from hook-form lets us access all the images of form in an array format....an functionality
     const submit = async (data) => {
+        setError("")
         if (post) {
             //if post exists, then if updated image exists, upload it else null
             const file = data.image[0] ? await services.uploadFile(data.image[0]) : null
@@ -42,22 +44,27 @@ function PostForm({post}) {
             }
             //now update the post
             // make the "data" such that it satisfies the args
-            const dbPost = await services.updatePost(
-                post.$id,
-                {
-                    ...data,
-                    featuredImage: file ? file.$id : undefined
-                })  // overwrite updated image id
-
-            if (dbPost) {
-                navigate(`/post/${dbPost.$id}`)
+            try {
+                const dbPost = await services.updatePost(
+                    post.$id,
+                    {
+                        ...data,
+                        featuredImage: file ? file.$id : undefined
+                    })  // overwrite updated image id
+                    console.log(dbPost);
+    
+                if (dbPost) {
+                    navigate(`/post/${dbPost.$id}`)
+                }
+            } catch (error) {
+                setError(error)
             }
         }
         //if post is to be created, do it as per 
         // ALWAYS HANDLE FILE UPLOADS PRIOR TO DATA UPLOAD wrt database, as file uploading gives it associated fileId which is to be passed in data 
         //logic is a bit different than tutorial and acceptss post even if image is not uploaded
         else {
-            console.log("submoit clicked");
+            console.log("submit clicked");
             // const file = data.image[0] ? await services.uploadFile(data.image[0]) : null
             // const dbPost = await services.createPost({
             //     ...data,        //spread data and overwrite featuredImage as per uploadFile and get userID from store
@@ -68,10 +75,14 @@ function PostForm({post}) {
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
-                console.log(data);
-                const dbPost = await services.createPost({ ...data, user_id: userData.$id });
-                if (dbPost) {
-                    navigate(`/post/${dbPost.$id}`)
+                try {
+                    const dbPost = await services.createPost({ ...data, user_id: userData.$id });
+                    if (dbPost) {
+                        navigate(`/post/${dbPost.$id}`)
+                    }
+                } catch (error) {
+                    setError(error)
+                    services.deleteFile(fileId)
                 }
             }
         }
@@ -157,6 +168,7 @@ function PostForm({post}) {
                 <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
                     {post ? "Update" : "Submit"}
                 </Button>
+                <p className={`my-4 p-3 text-red-400 bg-gray-100 rounded-lg  ${ error ? "inline-block" : "hidden"}`}>{error.message}</p>
             </div>
         </form>
     )
